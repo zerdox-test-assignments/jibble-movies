@@ -34,3 +34,8 @@ select {
   font-family: inherit;
   font-size: inherit;
 }
+
+input {
+  min-width: 0;
+  field-sizing: content;
+}

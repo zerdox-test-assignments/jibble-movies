@@ -14,6 +14,7 @@ import { RouterView } from "vue-router";
 
 <style scoped lang="scss">
 main {
-  padding: 2em;
+  --page-content-x-padding: 2em;
+  padding: 0 var(--page-content-x-padding) 2em;
 }
 </style>
