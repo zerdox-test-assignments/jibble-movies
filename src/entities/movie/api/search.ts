@@ -4,7 +4,7 @@ import { type DataPaginated } from "@/shared/api/types";
 
 export async function search(
   ky: KyInstance,
-  title: Movie["Title"],
+  title: Movie["Title"] = "",
   page: DataPaginated["page"] = 1,
 ) {
   const res = await ky

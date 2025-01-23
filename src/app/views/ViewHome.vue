@@ -16,11 +16,16 @@ function searchHandle(event: KeyboardEvent) {
   delete params.value.p;
 }
 
-const params = ref(useUrlSearchParams("history", { removeFalsyValues: true }));
+const params = ref(
+  useUrlSearchParams<{
+    q?: string;
+    p?: string;
+  }>("history", { removeFalsyValues: true }),
+);
 watch(
   () => params.value,
   async () => {
-    movies.value = await searchMovies(ky, params.value.q, params.value.p);
+    movies.value = await searchMovies(ky, params.value.q, +(params.value.p ?? 1));
   },
   { immediate: true, deep: true },
 );
@@ -54,7 +59,7 @@ watch(
         <li v-for="n in movies.total_pages" :key="n">
           <RouterLink
             :to="{ name: 'home', query: { ...params, p: n } }"
-            @click="() => (params.p = n)"
+            @click="() => (params.p = n.toString())"
           >
             {{ n }}
           </RouterLink>
