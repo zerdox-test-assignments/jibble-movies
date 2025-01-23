@@ -17,7 +17,8 @@ header {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 2em;
+  padding: 2em 2em 1em 2em;
+  border-bottom: 1px solid oklch(85% 0 0);
 }
 
 nav {
