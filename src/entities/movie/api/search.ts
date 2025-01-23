@@ -9,7 +9,7 @@ export async function search(
 ) {
   const res = await ky
     .get(`movies/search`, {
-      searchParams: { title, page },
+      searchParams: { Title: title, page },
     })
     .json<DataPaginated<Movie>>();
   return res;
