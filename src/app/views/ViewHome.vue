@@ -10,11 +10,6 @@ const ky = injectKy();
 const MOVIE_SUGGESTION = "Order of the Phoenix";
 
 const movies = ref<Awaited<ReturnType<typeof searchMovies>> | undefined>();
-function searchHandle(event: KeyboardEvent) {
-  const title = (event.target as HTMLInputElement).value;
-  params.value.q = title;
-  delete params.value.p;
-}
 
 const params = ref(
   useUrlSearchParams<{
@@ -29,6 +24,12 @@ watch(
   },
   { immediate: true, deep: true },
 );
+
+const inputSearchValue = ref(params.value.q ?? "");
+function triggerSearch(title: string) {
+  params.value.q = title;
+  delete params.value.p;
+}
 </script>
 
 <template>
@@ -36,19 +37,26 @@ watch(
     <p>
       Search your favorite movies below. Or try searching
       <RouterLink
-        :to="{ query: { ...params, q: MOVIE_SUGGESTION } }"
-        @click="params.q = MOVIE_SUGGESTION"
+        :to="{ query: { ...params, p: undefined, q: MOVIE_SUGGESTION } }"
+        @click="() => triggerSearch(MOVIE_SUGGESTION)"
       >
         {{ MOVIE_SUGGESTION }}
       </RouterLink>
     </p>
-    <input
-      v-bind:value="params.q"
-      class="search-input"
-      type="search"
-      placeholder="What are you going to watch tonight?"
-      @keyup.enter="searchHandle"
-    />
+    <div class="search__bar">
+      <input
+        :value="params.q"
+        @input="(event) => (inputSearchValue = (event.target as HTMLInputElement).value)"
+        class="search__input"
+        type="search"
+        name="query"
+        placeholder="What are you going to watch tonight?"
+        @keyup.enter="() => triggerSearch(inputSearchValue)"
+      />
+      <button @click="() => triggerSearch(inputSearchValue)" type="button" class="search__button">
+        Search
+      </button>
+    </div>
   </label>
   <template v-if="movies?.data">
     <ul>
@@ -58,6 +66,8 @@ watch(
       <ul>
         <li v-for="n in movies.total_pages" :key="n">
           <RouterLink
+            :aria-current="+(params.p ?? 1) === n ? 'page' : undefined"
+            :aria-label="`Goto Page ${n}`"
             :to="{ name: 'home', query: { ...params, p: n } }"
             @click="() => (params.p = n.toString())"
           >
@@ -84,7 +94,12 @@ watch(
   animation-range: 50px 90px;
   border-bottom: 1px solid transparent;
 }
-.search-input {
+.search__bar {
+  display: flex;
+  gap: 6px;
+}
+.search__input {
+  flex-grow: 1;
 }
 
 ul {
