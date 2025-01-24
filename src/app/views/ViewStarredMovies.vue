@@ -1,5 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { MoviesList } from "@/widgets/movie/ui";
+import { useSavedMoviesStore } from "@/entities/movie/model";
 
-<template>Nothing here yet!</template>
+const { movies } = useSavedMoviesStore();
+</script>
 
-<style scoped lang="scss"></style>
+<template>
+  <MoviesList :movies="movies" />
+</template>

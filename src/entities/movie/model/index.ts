@@ -1,5 +1,2 @@
-export type Movie = {
-  Title: string;
-  Year: number;
-  imdbID: string;
-};
+export * from "./types";
+export * from "./stores";

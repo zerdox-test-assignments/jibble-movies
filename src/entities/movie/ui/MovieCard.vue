@@ -5,8 +5,7 @@ const props = defineProps<{
 }>();
 
 import { useId, computed, type Component } from "vue";
-import { type Movie } from "@/entities/movie/model";
-import { useSavedMoviesStore } from "@/app/stores/saved-movies";
+import { useSavedMoviesStore, type Movie } from "@/entities/movie/model";
 const savedMoviesStore = useSavedMoviesStore();
 
 const id = useId();
