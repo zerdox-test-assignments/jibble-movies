@@ -1,21 +1,35 @@
 import { useUrlSearchParams } from "@vueuse/core";
 
 export type QueryParams = {
-  q?: string;
-  p?: string;
+  q?: string; // Search query term
+  p?: string; // Pagination page number
 };
 
-const params = useUrlSearchParams<QueryParams>("history", { removeFalsyValues: true });
+/**
+ * Manages movie search parameters and binds them to the URL
+ */
+const searchParams = useUrlSearchParams<QueryParams>("history", { removeFalsyValues: true });
 
+/**
+ * Returns an object containing methods to handle movie search and pagination
+ */
 export function useMoviesSearch() {
-  function query(q: string) {
-    params.q = q;
-    delete params.p;
+  /**
+   * Searches movies based on the query term
+   * @param q The search query string
+   */
+  function search(query: string) {
+    searchParams.q = query;
+    if (searchParams.p) delete searchParams.p;
   }
 
-  function page(p: number) {
-    params.p = p.toString();
+  /**
+   * Handles pagination of movie results
+   * @param p The current page number
+   */
+  function paginate(page: number) {
+    searchParams.p = String(page);
   }
 
-  return { params, query, page };
-}
+  return { searchParams, search, paginate };
+};

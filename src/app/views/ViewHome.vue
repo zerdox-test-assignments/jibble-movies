@@ -7,12 +7,12 @@ import { injectKy } from "@/app/plugins/ky";
 const ky = injectKy();
 
 const movies = ref<Awaited<ReturnType<typeof searchMovies>> | undefined>();
-const { params } = useMoviesSearch();
+const { searchParams } = useMoviesSearch();
 
 watch(
   params,
   async () => {
-    movies.value = await searchMovies(ky, params.q, +(params.p ?? 1));
+    movies.value = await searchMovies(ky, searchParams.q, +(searchParams.p ?? 1));
   },
   { immediate: true, deep: true },
 );

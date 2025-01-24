@@ -3,7 +3,6 @@ const props = defineProps<{
   movies?: Movie[];
 }>();
 
-import { defineProps } from "vue";
 import { type Movie } from "@/entities/movie/model";
 import { MovieCard } from "@/entities/movie/ui";
 </script>

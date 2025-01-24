@@ -6,8 +6,8 @@ import { useMoviesSearch } from "@/features/movie/ui";
 const MOVIE_SUGGESTION = "Order of the Phoenix";
 
 const route = useRoute();
-const { params, query } = useMoviesSearch();
-const inputSearchValue = ref(params.q ?? "");
+const { searchParams, query } = useMoviesSearch();
+const inputSearchValue = ref(searchParams.q ?? "");
 </script>
 
 <template>
@@ -29,7 +29,7 @@ const inputSearchValue = ref(params.q ?? "");
     </p>
     <div class="search__bar">
       <input
-        :value="params.q"
+        :value="searchParams.q"
         @input="(event) => (inputSearchValue = (event.target as HTMLInputElement).value)"
         class="search__input"
         type="search"
