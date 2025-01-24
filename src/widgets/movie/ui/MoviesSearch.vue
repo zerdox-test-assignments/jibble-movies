@@ -65,6 +65,19 @@ const inputSearchValue = ref(params.q ?? "");
 }
 .search__input {
   flex-grow: 1;
+  border: 1px solid oklch(20% 0 0);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.search__button {
+  border: 1px solid oklch(20% 0 0);
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.search__button:hover {
+  background-color: oklch(85% 0 0);
 }
 
 @keyframes search-scroll-border {

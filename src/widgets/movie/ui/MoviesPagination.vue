@@ -4,36 +4,20 @@ const props = defineProps<{
 }>();
 
 import { defineProps } from "vue";
-import { RouterLink, useRoute } from "vue-router";
 import { useMoviesSearch } from "@/features/movie/ui";
-
+import { VPagination } from "vuetify/components/VPagination";
 const { params, page } = useMoviesSearch();
-const route = useRoute();
+
+function pageHandle(v: number) {
+  page(v || 1);
+  window.scrollTo(0, 0);
+}
 </script>
 
 <template>
-  <nav role="navigation" aria-label="Pagination Navigation">
-    <ul>
-      <li v-for="pageNumber in props.pages" :key="pageNumber">
-        <!--
-          this looks crazy but it just prevents p=1 (default) from
-          getting into url. also aria-current should be handled properly
-        -->
-        <RouterLink
-          :aria-current="+(params.p ?? 1) === pageNumber ? 'page' : undefined"
-          :aria-label="`Goto Page ${pageNumber}`"
-          :to="{
-            query: {
-              ...route.query,
-              q: params.q || undefined,
-              p: pageNumber !== 1 ? pageNumber : undefined,
-            },
-          }"
-          @click="() => page(pageNumber)"
-        >
-          {{ pageNumber }}
-        </RouterLink>
-      </li>
-    </ul>
-  </nav>
+  <VPagination
+    :length="props.pages"
+    :modelValue="+(params.p || 1)"
+    @update:modelValue="pageHandle"
+  ></VPagination>
 </template>
