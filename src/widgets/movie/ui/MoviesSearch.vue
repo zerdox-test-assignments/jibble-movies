@@ -34,10 +34,16 @@ const inputSearchValue = ref(searchParams.q ?? "");
         class="search__input"
         type="search"
         name="query"
+        data-test="search-input"
         placeholder="What are you going to watch tonight?"
         @keyup.enter="() => search(inputSearchValue)"
       />
-      <button @click="() => search(inputSearchValue)" type="button" class="search__button">
+      <button
+        @click="() => search(inputSearchValue)"
+        type="button"
+        class="search__button"
+        data-test="search-button"
+      >
         Search
       </button>
     </div>

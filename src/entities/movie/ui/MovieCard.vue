@@ -23,7 +23,7 @@ function saveBtnHandle() {
 </script>
 
 <template>
-  <component class="movie" :is="props.element ?? 'div'">
+  <component class="movie" data-test="movie-card" :is="props.element ?? 'div'">
     <label :for="id">
       <p class="title">{{ props.movie.Title }}</p>
     </label>
