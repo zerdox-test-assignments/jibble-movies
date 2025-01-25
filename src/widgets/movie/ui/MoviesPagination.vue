@@ -3,12 +3,12 @@ const props = defineProps<{
   pages?: number;
 }>();
 
-import { useMoviesSearch } from "@/features/movie/ui";
+import { useMoviesSearch } from "@/features/movie-search/ui";
 import { VPagination } from "vuetify/components/VPagination";
-const { searchParams, page } = useMoviesSearch();
+const { searchParams, paginate } = useMoviesSearch();
 
 function pageHandle(v: number) {
-  page(v || 1);
+  paginate(v || 1);
   window.scrollTo(0, 0);
 }
 </script>

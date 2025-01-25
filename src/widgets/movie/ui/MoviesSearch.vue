@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
-import { useMoviesSearch } from "@/features/movie/ui";
+import { useMoviesSearch } from "@/features/movie-search/ui";
 
 const MOVIE_SUGGESTION = "Order of the Phoenix";
 
 const route = useRoute();
-const { searchParams, query } = useMoviesSearch();
+const { searchParams, search } = useMoviesSearch();
 const inputSearchValue = ref(searchParams.q ?? "");
 </script>
 
@@ -22,7 +22,7 @@ const inputSearchValue = ref(searchParams.q ?? "");
             q: MOVIE_SUGGESTION,
           },
         }"
-        @click="() => query(MOVIE_SUGGESTION)"
+        @click="() => search(MOVIE_SUGGESTION)"
       >
         {{ MOVIE_SUGGESTION }}
       </RouterLink>
@@ -35,9 +35,9 @@ const inputSearchValue = ref(searchParams.q ?? "");
         type="search"
         name="query"
         placeholder="What are you going to watch tonight?"
-        @keyup.enter="() => query(inputSearchValue)"
+        @keyup.enter="() => search(inputSearchValue)"
       />
-      <button @click="() => query(inputSearchValue)" type="button" class="search__button">
+      <button @click="() => search(inputSearchValue)" type="button" class="search__button">
         Search
       </button>
     </div>

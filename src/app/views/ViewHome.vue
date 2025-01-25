@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { MoviesSearch, MoviesList, MoviesPagination } from "@/widgets/movie/ui";
-import { useMoviesSearch } from "@/features/movie/ui";
+import { useMoviesSearch } from "@/features/movie-search/ui";
 import { searchMovies } from "@/entities/movie/api";
 import { injectKy } from "@/app/plugins/ky";
 const ky = injectKy();
@@ -10,7 +10,7 @@ const movies = ref<Awaited<ReturnType<typeof searchMovies>> | undefined>();
 const { searchParams } = useMoviesSearch();
 
 watch(
-  params,
+  searchParams,
   async () => {
     movies.value = await searchMovies(ky, searchParams.q, +(searchParams.p ?? 1));
   },
