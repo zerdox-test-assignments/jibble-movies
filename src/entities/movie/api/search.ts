@@ -17,5 +17,12 @@ export async function search(
       ),
     })
     .json<DataPaginated<Movie>>();
+
+  /* better use zod here */
+  const responseIsInvalid = ["total_pages", "data", "page", "total"].some(
+    (prop) => !res.hasOwnProperty(prop),
+  );
+  if (responseIsInvalid) throw new Error("Invalid API response structure");
+
   return res;
 }

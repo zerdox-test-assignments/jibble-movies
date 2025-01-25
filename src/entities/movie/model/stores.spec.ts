@@ -1,11 +1,11 @@
-import { describe, beforeEach, test, expect, vi } from 'vitest';
-import { createPinia, setActivePinia } from 'pinia';
-import { useSavedMoviesStore } from './stores';
-import type { Movie } from '@/entities/movie/model';
+import { describe, beforeEach, test, expect, vi } from "vitest";
+import { createPinia, setActivePinia } from "pinia";
+import { useSavedMoviesStore } from "./stores";
+import type { Movie } from "@/entities/movie/model";
 import { randMovie, randPastDate } from "@ngneat/falso";
 import { nanoid } from "nanoid";
 
-describe('useSavedMoviesStore', () => {
+describe("useSavedMoviesStore", () => {
   // Create fresh pinia for each test
   beforeEach(() => {
     setActivePinia(createPinia());
@@ -15,15 +15,15 @@ describe('useSavedMoviesStore', () => {
   const generateMovie = (): Movie => ({
     Title: randMovie(),
     Year: randPastDate().getFullYear(),
-    imdbID: nanoid()
+    imdbID: nanoid(),
   });
 
-  test('initializes with empty value', () => {
+  test("initializes with empty value", () => {
     const store = useSavedMoviesStore();
     expect(store.movies).toEqual([]);
   });
 
-  test('can add and remove a movie', () => {
+  test("can add and remove a movie", () => {
     const store = useSavedMoviesStore();
     const movie1 = generateMovie();
     const movie2 = generateMovie();
@@ -40,12 +40,12 @@ describe('useSavedMoviesStore', () => {
     expect(store.movies).toEqual([movie2]);
   });
 
-  test('does nothing when removing non-existent movie', () => {
+  test("does nothing when removing non-existent movie", () => {
     const store = useSavedMoviesStore();
     const movie = generateMovie();
     store.add(movie);
 
-    store.remove('non-existent-id');
+    store.remove("non-existent-id");
     expect(store.movies).toEqual([movie]);
   });
 });

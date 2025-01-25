@@ -32,4 +32,4 @@ export function useMoviesSearch() {
   }
 
   return { searchParams, search, paginate };
-};
+}

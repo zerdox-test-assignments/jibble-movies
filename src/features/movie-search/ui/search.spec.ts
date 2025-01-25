@@ -1,9 +1,9 @@
-import { describe, test, expect } from 'vitest';
-import { useMoviesSearch, type QueryParams } from './search';
-import { randMovie, randNumber } from '@ngneat/falso';
+import { describe, test, expect } from "vitest";
+import { useMoviesSearch, type QueryParams } from "./search";
+import { randMovie, randNumber } from "@ngneat/falso";
 
-describe('useMoviesSearch', () => {
-  test('search() after paginate() clears existing page number', () => {
+describe("useMoviesSearch", () => {
+  test("search() after paginate() clears existing page number", () => {
     const { search, paginate, searchParams } = useMoviesSearch();
     const query = randMovie();
     const pageNumber = randNumber();
@@ -15,12 +15,12 @@ describe('useMoviesSearch', () => {
     expect(searchParams).toEqual({ q: query, p: undefined } satisfies QueryParams);
   });
 
-  test('search() handles empty query', () => {
+  test("handles empty query", () => {
     const { search, searchParams } = useMoviesSearch();
-    search('');
+    search("");
     expect(searchParams).toEqual({
-      q: '',
-      p: undefined
+      q: "",
+      p: undefined,
     } satisfies QueryParams);
   });
 });
