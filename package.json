@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "engines" : {
+    "npm" : "^11",
+    "node" : "^22 || ^20"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -11,7 +15,9 @@
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write .",
+    "test": "run-p test:unit test:e2e",
     "test:unit": "vitest",
+    "test:e2e": "npm run cy:run",
     "cy:open": "cypress open --config-file cypress.config.mts",
     "cy:run": "cypress run --config-file cypress.config.mts"
   },
