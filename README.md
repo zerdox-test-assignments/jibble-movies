@@ -1,5 +1,21 @@
 # jibble-movies
 
+## Features
+
+- Scaffolded with official create-vue
+- Search movies from the API. Control the endpoint in `.env` file
+- Ky is used as a lightweight fetch wrapper, alternative to axios
+- Storage saved movies using `pinia-plugin-persistedstate`
+- Fully typesafe, with strict TS and ESLint rules
+- Examples of unit tests as well as e2e tests. Low code coupling makes it easy to unit test
+- Example of using UI framework, Vuetify
+- Some Scss styles, though, I don't rely on preprocessor features
+- Repo is an example of FSD architecture implementation: https://feature-sliced.design
+- Commit names are Conventional Commits
+
+See code in action: `npm run dev`
+Test it: `npm run test`
+
 ## JibbleGroup Frontend Developer Assessment
 
 ### Objective
