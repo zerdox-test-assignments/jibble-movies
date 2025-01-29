@@ -7,7 +7,11 @@ import { RouterView } from "vue-router";
 <template>
   <Header />
   <main>
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <KeepAlive include="ViewHome">
+        <component :is="Component" />
+      </KeepAlive>
+    </RouterView>
   </main>
   <Footer />
 </template>
